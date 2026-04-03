@@ -44,6 +44,6 @@ const paperSchema = new mongoose.Schema({
     },
 },{timestamps:true});
 
-const Paper = mongoose.model('Paper', paperSchema);
+const Paper = mongoose.model('Paper', paperSchema, 'papers');
 
 export {Paper};

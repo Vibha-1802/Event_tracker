@@ -36,7 +36,7 @@ const profileSchema = new mongoose.Schema({
         required:true
     }],
     joiningDate:{
-        type:date,
+        type:Date,
         required:true
     },
     photo:{
