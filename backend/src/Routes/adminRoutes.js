@@ -1,5 +1,5 @@
 import express from "express";
-import {changeStatusPaper,changeStatusPatent} from "../Controllers/patentControllers.js";
+import {changeStatusPaper,changeStatusPatent} from "../Controllers/adminControllers.js";
 
 const adminRoutes = express.Router();
 

@@ -1,5 +1,5 @@
 import express from "express";
-import {createUser,getObjectIdByStaffId,changePassword} from "../Controllers/patentControllers.js";
+import {createUser,getObjectIdByStaffId,changePassword} from "../Controllers/userControllers.js";
 
 const userRoutes = express.Router();
 
