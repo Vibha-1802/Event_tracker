@@ -4,8 +4,8 @@ import {createSocialService,getAllSocialService,getSocialServiceByStaffId,getSoc
 const socialServiceRoutes = express.Router();
 
 socialServiceRoutes.get("/allSocialServices",getAllSocialService);
-socialServiceRoutes.get("/:staffId",getSocialServiceByStaffId);
 socialServiceRoutes.get("/socialServiceByStaffName",getSocialServiceByStaffName);
+socialServiceRoutes.get("/:staffId",getSocialServiceByStaffId);
 socialServiceRoutes.post("/newSocialService",createSocialService)
 
 export {socialServiceRoutes}

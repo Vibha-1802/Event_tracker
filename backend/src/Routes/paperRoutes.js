@@ -4,8 +4,8 @@ import {createPaper,getAllPaper,getPaperByStaffId,getPaperByStaffName} from "../
 const paperRoutes = express.Router();
 
 paperRoutes.get("/allPapers",getAllPaper);
-paperRoutes.get("/:staffId",getPaperByStaffId);
 paperRoutes.get("/paperByStaffName",getPaperByStaffName);
+paperRoutes.get("/:staffId",getPaperByStaffId);
 paperRoutes.post("/newPaper",createPaper);
 
 export {paperRoutes}

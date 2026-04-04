@@ -4,8 +4,8 @@ import {createProfile,getAllProfile,getProfileByStaffId,getProfileByStaffName} f
 const profileRoutes = express.Router();
 
 profileRoutes.get("/allProfiles",getAllProfile);
-profileRoutes.get("/:staffId",getProfileByStaffId);
 profileRoutes.get("/profileByStaffName",getProfileByStaffName);
+profileRoutes.get("/:staffId",getProfileByStaffId);
 profileRoutes.post("/newProfile",createProfile);
 
 export {profileRoutes}

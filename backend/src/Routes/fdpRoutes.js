@@ -4,8 +4,8 @@ import {createFdp,getAllFdp,getFdpByStaffId,getFdpByStaffName} from "../Controll
 const fdpRoutes = express.Router();
 
 fdpRoutes.get("/allFdps",getAllFdp);
-fdpRoutes.get("/:staffId",getFdpByStaffId);
 fdpRoutes.get("/fdpByStaffName",getFdpByStaffName);
+fdpRoutes.get("/:staffId",getFdpByStaffId);
 fdpRoutes.post("/newFdp",createFdp);
 
 export {fdpRoutes}
