@@ -23,7 +23,7 @@ const getFdpByStaffId = async (req, res) => {
 
 const createFdp = async (req, res) => {
   try {
-    const { staffId,topic,skillsgained,dates,certificate,photos } = req.body;
+    const { staffId,topic,skillsGained,dates,certificate,photos } = req.body;
     const user = await User.findOne({ staffId });
     if (!user) {
       return res.status(404).json({ message: "User not found" });

@@ -4,6 +4,9 @@ import { Patent } from "../Models/patentModel.js"
 const changeStatusPaper = async (req, res) => {
   try {
     const { paperId, status } = req.body;
+    if (!mongoose.Types.ObjectId.isValid(paperId)) {
+      return res.status(400).json({ message: "Invalid ID" });
+    }
     const updated = await Paper.findByIdAndUpdate(
       paperId,
       { status },
@@ -25,6 +28,9 @@ const changeStatusPaper = async (req, res) => {
 const changeStatusPatent = async (req, res) => {
   try {
     const { patentId, status } = req.body;
+    if (!mongoose.Types.ObjectId.isValid(patentId)) {
+      return res.status(400).json({ message: "Invalid ID" });
+    }
     const updated = await Patent.findByIdAndUpdate(
       patentId,
       { status },

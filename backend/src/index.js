@@ -2,13 +2,13 @@ import express from "express";
 import mongoose from "mongoose";
 import path from "path";
 
-import { adminRoutes } from "./routes/adminRoutes.js";
-import { fdpRoutes } from "./routes/fdpRoutes.js";
-import { paperRoutes } from "./routes/paperRoutes.js";
-import { patentRoutes } from "./routes/patentRoutes.js";
-import { profileRoutes } from "./routes/profileRoutes.js";
-import { socialServiceRoutes } from "./routes/socialServiceRoutes.js";
-import { userRoutes } from "./routes/userRoutes.js";
+import { adminRoutes } from "./Routes/adminRoutes.js";
+import { fdpRoutes } from "./Routes/fdpRoutes.js";
+import { paperRoutes } from "./Routes/paperRoutes.js";
+import { patentRoutes } from "./Routes/patentRoutes.js";
+import { profileRoutes } from "./Routes/profileRoutes.js";
+import { socialServiceRoutes } from "./Routes/socialServiceRoutes.js";
+import { userRoutes } from "./Routes/userRoutes.js";
 
 
 const app = express();
@@ -33,7 +33,7 @@ app.use('/paper',paperRoutes)
 app.use('/patent',patentRoutes)
 app.use('/profile',profileRoutes)
 app.use('/socialservice',socialServiceRoutes)
-app.use('/user',userRoutes)
+app.use('/users',userRoutes)
 
 app.listen(3000, () => {
     console.log("APP IS LISTENING ON PORT 3000!")

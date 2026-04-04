@@ -37,7 +37,7 @@ const paperSchema = new mongoose.Schema({
     status:{
         type:String,
         enum:['On Hold','Grant','Published'],
-        required:true
+        default: "On Hold"
     },
     bill:{
         type:String

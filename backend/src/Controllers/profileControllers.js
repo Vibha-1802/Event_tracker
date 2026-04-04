@@ -8,7 +8,7 @@ const getProfileByStaffId = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    const data = await Profile.find({ staff: user._id });
+    const data = await Profile.find({ staffId });
     res.status(200).json({
       count: data.length,
       data
@@ -28,7 +28,7 @@ const createProfile = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     const newEntry = new Profile({
-      staffId: user._id,
+      staffId,
       name,
       age,
       phoneNumber,
@@ -53,7 +53,7 @@ const createProfile = async (req, res) => {
 
 const getAllProfile = async (req, res) => {
   try {
-    const data = await Profile.find().populate("staff", "staffId role");
+    const data = await Profile.find();
     res.status(200).json({
       count: data.length,
       data

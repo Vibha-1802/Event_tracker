@@ -6,6 +6,6 @@ const patentRoutes = express.Router();
 patentRoutes.get("/allPatents",getAllPatent);
 patentRoutes.get("/patentByStaffName",getPatentByStaffName);
 patentRoutes.get("/:staffId",getPatentByStaffId);
-patentRoutes.post("/newPatentRoutes",createPatent);
+patentRoutes.post("/newPatent",createPatent);
 
 export {patentRoutes}

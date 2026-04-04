@@ -25,7 +25,7 @@ const patentSchema = new mongoose.Schema({
     status:{
         type:String,
         enum:['On Hold','Grant','Accepted'],
-        required:true
+        default: "On Hold"
     },
 },{timestamps:true});
 
