@@ -31,7 +31,7 @@ const createFdp = async (req, res) => {
     const newEntry = new Fdp({
       staff: user._id,
       topic,
-      skillsgained,
+      skillsGained,
       dates,
       certificate,
       photos

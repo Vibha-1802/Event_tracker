@@ -12,10 +12,10 @@ const getPaperByStaffId = async (req, res) => {
     const data = await Paper.find({ staff: user._id });
 
     const currentUser = req.user;
-    const isOwner = data.staff.staffId === currentUser.staffId;
-    const isAdmin = currentUser.role === "Admin";
+    const isOwner = data.staff?.staffId === currentUser?.staffId;
+    const isAdmin = currentUser?.role === "Admin";
 
-    if(data.status === "On Hold" && !isOwner){
+    if(data.status === "On Hold" && !isOwner && !isAdmin){
       delete data.pdf;
     }
 
@@ -66,31 +66,28 @@ const createPaper = async (req, res) => {
 const getAllPaper = async (req, res) => {
   try {
     const data = await Paper.find().populate("staff", "staffId role");
-    
     const currentUser = req.user;
-
-    const filtered = data.map(paper=>{
-      const isOwner = paper.staff.staffId === currentUser.staffId;
-      const isAdmin = currentUser.role === "Admin";
-
-      let obj=paper.toObject();
-
-      if(obj.status === "On Hold" && !isOwner){
-        delete obj.pdf;
-      }
-
-      if(!isAdmin) {
-        delete obj.bill;
-      }
-      return obj;
-    });
+    const filtered = data
+      .filter(paper => paper.staff) 
+      .map(paper => {
+        const obj = paper.toObject();
+        const isOwner = paper.staff?.staffId === currentUser?.staffId;
+        const isAdmin = currentUser?.role === "Admin";
+        if (obj.status === "On Hold" && !isOwner && !isAdmin) {
+          delete obj.pdf;
+        }
+        if (!isAdmin) {
+          delete obj.bill;
+        }
+        return obj;
+      });
     res.status(200).json({
       count: filtered.length,
       data: filtered
     });
   } 
   catch (err) {
-    console.log(err);
+    console.log("ERROR:", err);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -108,10 +105,10 @@ const getPaperByStaffName = async (req, res) => {
     }
     const data = await Paper.find({ staff: user._id });
     const currentUser = req.user;
-    const isOwner = data.staff.staffId === currentUser.staffId;
-    const isAdmin = currentUser.role === "Admin";
+    const isOwner = data.staff?.staffId === currentUser?.staffId;
+    const isAdmin = currentUser?.role === "Admin";
 
-    if(data.status === "On Hold" && !isOwner){
+    if(data.status === "On Hold" && !isOwner && !isAdmin){
       delete data.pdf;
     }
 

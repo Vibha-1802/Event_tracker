@@ -154,3 +154,771 @@ req :
     "status": "Accepted"
 }
 res : 200`
+
+Fdp - 
+Name : getAllFdp
+Route : http://localhost:3000/fdp/allFdps
+Type : Get 
+Function : Gives all the Fdps
+req : null
+res :
+{
+    "count": 6,
+    "data": [
+        {
+            "_id": "69cfc030084eb126c305f2f3",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ed",
+                "staffId": "PROF001",
+                "role": "Prof"
+            },
+            "topic": "AI Workshop",
+            "skillsGained": [
+                "ML",
+                "AI"
+            ],
+            "dates": [
+                "2026-04-03T13:27:12.706Z"
+            ],
+            "certificate": "cert1.pdf",
+            "photos": [
+                "img1.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.711Z",
+            "updatedAt": "2026-04-03T13:27:12.711Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f2f4",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ee",
+                "staffId": "PROF002",
+                "role": "Prof"
+            },
+            "topic": "Cybersecurity FDP",
+            "skillsGained": [
+                "Security"
+            ],
+            "dates": [
+                "2026-04-03T13:27:12.706Z"
+            ],
+            "certificate": "cert2.pdf",
+            "photos": [
+                "img2.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.712Z",
+            "updatedAt": "2026-04-03T13:27:12.712Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f2f5",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ef",
+                "staffId": "PROF003",
+                "role": "Prof"
+            },
+            "topic": "Cloud FDP",
+            "skillsGained": [
+                "AWS"
+            ],
+            "dates": [
+                "2026-04-03T13:27:12.706Z"
+            ],
+            "certificate": "cert3.pdf",
+            "photos": [
+                "img3.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.712Z",
+            "updatedAt": "2026-04-03T13:27:12.712Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f2f6",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2f0",
+                "staffId": "PROF004",
+                "role": "Prof"
+            },
+            "topic": "Data Science FDP",
+            "skillsGained": [
+                "Python"
+            ],
+            "dates": [
+                "2026-04-03T13:27:12.706Z"
+            ],
+            "certificate": "cert4.pdf",
+            "photos": [
+                "img4.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.712Z",
+            "updatedAt": "2026-04-03T13:27:12.712Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f2f7",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ed",
+                "staffId": "PROF001",
+                "role": "Prof"
+            },
+            "topic": "IoT FDP",
+            "skillsGained": [
+                "Sensors"
+            ],
+            "dates": [
+                "2026-04-03T13:27:12.706Z"
+            ],
+            "certificate": "cert5.pdf",
+            "photos": [
+                "img5.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.713Z",
+            "updatedAt": "2026-04-03T13:27:12.713Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f2f8",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ee",
+                "staffId": "PROF002",
+                "role": "Prof"
+            },
+            "topic": "Blockchain FDP",
+            "skillsGained": [
+                "Blockchain"
+            ],
+            "dates": [
+                "2026-04-03T13:27:12.706Z"
+            ],
+            "certificate": "cert6.pdf",
+            "photos": [
+                "img6.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.713Z",
+            "updatedAt": "2026-04-03T13:27:12.713Z"
+        }
+    ]
+}
+
+Name : getFdpByStaffName
+Route : http://localhost:3000/fdp/fdpByStaffName 
+Type : Get 
+Function : Gives Fdps for particular staff by their Name as input
+req : http://localhost:3000/fdp/fdpByStaffName?name=Dr A
+res : 
+{
+    "count": 2,
+    "data": [
+        {
+            "_id": "69cfc030084eb126c305f2f3",
+            "staff": "69cfc030084eb126c305f2ed",
+            "topic": "AI Workshop",
+            "skillsGained": [
+                "ML",
+                "AI"
+            ],
+            "dates": [
+                "2026-04-03T13:27:12.706Z"
+            ],
+            "certificate": "cert1.pdf",
+            "photos": [
+                "img1.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.711Z",
+            "updatedAt": "2026-04-03T13:27:12.711Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f2f7",
+            "staff": "69cfc030084eb126c305f2ed",
+            "topic": "IoT FDP",
+            "skillsGained": [
+                "Sensors"
+            ],
+            "dates": [
+                "2026-04-03T13:27:12.706Z"
+            ],
+            "certificate": "cert5.pdf",
+            "photos": [
+                "img5.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.713Z",
+            "updatedAt": "2026-04-03T13:27:12.713Z"
+        }
+    ]
+}
+
+Name : getFdpByStaffId
+Route : http://localhost:3000/fdp/:staffId
+Type : Get 
+Function : Gives Fdps for particular staff by their Id as input
+req : http://localhost:3000/fdp/PROF001
+res :
+{
+    "count": 2,
+    "data": [
+        {
+            "_id": "69cfc030084eb126c305f2f3",
+            "staff": "69cfc030084eb126c305f2ed",
+            "topic": "AI Workshop",
+            "skillsGained": [
+                "ML",
+                "AI"
+            ],
+            "dates": [
+                "2026-04-03T13:27:12.706Z"
+            ],
+            "certificate": "cert1.pdf",
+            "photos": [
+                "img1.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.711Z",
+            "updatedAt": "2026-04-03T13:27:12.711Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f2f7",
+            "staff": "69cfc030084eb126c305f2ed",
+            "topic": "IoT FDP",
+            "skillsGained": [
+                "Sensors"
+            ],
+            "dates": [
+                "2026-04-03T13:27:12.706Z"
+            ],
+            "certificate": "cert5.pdf",
+            "photos": [
+                "img5.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.713Z",
+            "updatedAt": "2026-04-03T13:27:12.713Z"
+        }
+    ]
+}
+
+Name : createFdp
+Route : http://localhost:3000/fdp/newFdp
+Type : Post
+Function : Creates a new Entry of Fdp
+req : 
+{
+    "staffId": "PROF001",
+    "topic": "Cloud Workshop",
+    "skillsGained": ["CC"],
+    "dates": ["2026-04-03T13:27:12.706Z"],
+    "certificate": "cert7.pdf",
+    "photos": ["img7.jpg"]
+}
+res : 201
+
+Paper - 
+Name : getAllPaper
+Route : http://localhost:3000/paper/allPapers
+Type : Get 
+Function : Gives all the Papers
+req :
+{
+    "user" : hve to chk
+}
+res :
+{
+    "count": 6,
+    "data": [
+        {
+            "_id": "69cfc030084eb126c305f2fa",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ed",
+                "staffId": "PROF001",
+                "role": "Prof"
+            },
+            "topic": "AI Paper",
+            "domain": [
+                "AI"
+            ],
+            "eventDates": [
+                "2026-04-03T13:27:12.717Z"
+            ],
+            "eventName": "IEEE",
+            "location": "Bangalore",
+            "publisher": "IEEE",
+            "photos": [],
+            "pdf": "p1.pdf",
+            "status": "Published",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.718Z",
+            "updatedAt": "2026-04-03T13:27:12.718Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f2fb",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ee",
+                "staffId": "PROF002",
+                "role": "Prof"
+            },
+            "topic": "Security Paper",
+            "domain": [
+                "Security"
+            ],
+            "eventDates": [
+                "2026-04-03T13:27:12.717Z"
+            ],
+            "eventName": "CyberConf",
+            "location": "Delhi",
+            "publisher": "Springer",
+            "photos": [],
+            "status": "On Hold",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.718Z",
+            "updatedAt": "2026-04-03T13:27:12.718Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f2fc",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ef",
+                "staffId": "PROF003",
+                "role": "Prof"
+            },
+            "topic": "Cloud Paper",
+            "domain": [
+                "Cloud"
+            ],
+            "eventDates": [
+                "2026-04-03T13:27:12.717Z"
+            ],
+            "eventName": "CloudExpo",
+            "location": "Mumbai",
+            "publisher": "Elsevier",
+            "photos": [],
+            "pdf": "p3.pdf",
+            "status": "Grant",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.719Z",
+            "updatedAt": "2026-04-03T13:27:12.719Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f2fd",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2f0",
+                "staffId": "PROF004",
+                "role": "Prof"
+            },
+            "topic": "DS Paper",
+            "domain": [
+                "DS"
+            ],
+            "eventDates": [
+                "2026-04-03T13:27:12.717Z"
+            ],
+            "eventName": "DS Conf",
+            "location": "Chennai",
+            "publisher": "IEEE",
+            "photos": [],
+            "pdf": "p4.pdf",
+            "status": "Published",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.719Z",
+            "updatedAt": "2026-04-03T13:27:12.719Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f2fe",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ed",
+                "staffId": "PROF001",
+                "role": "Prof"
+            },
+            "topic": "IoT Paper",
+            "domain": [
+                "IoT"
+            ],
+            "eventDates": [
+                "2026-04-03T13:27:12.717Z"
+            ],
+            "eventName": "IoT Summit",
+            "location": "Hyderabad",
+            "publisher": "ACM",
+            "photos": [],
+            "pdf": "p5.pdf",
+            "status": "Published",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.719Z",
+            "updatedAt": "2026-04-05T11:06:11.437Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f2ff",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ee",
+                "staffId": "PROF002",
+                "role": "Prof"
+            },
+            "topic": "Blockchain Paper",
+            "domain": [
+                "Blockchain"
+            ],
+            "eventDates": [
+                "2026-04-03T13:27:12.717Z"
+            ],
+            "eventName": "BlockConf",
+            "location": "Pune",
+            "publisher": "IEEE",
+            "photos": [],
+            "pdf": "p6.pdf",
+            "status": "Published",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.719Z",
+            "updatedAt": "2026-04-03T13:27:12.719Z"
+        }
+    ]
+}
+
+Name : gerPaperByStaffName
+Route : http://localhost:3000/paper/paperByStaffName
+Type : Get 
+Function : Gives Papers for particular staff by their Name as input
+req : http://localhost:3000/paper/paperByStaffName?name=Dr A
+{
+    "user": hve to chk
+}
+res : 200
+{
+    "count": 2,
+    "data": [
+        {
+            "_id": "69cfc030084eb126c305f2fa",
+            "staff": "69cfc030084eb126c305f2ed",
+            "topic": "AI Paper",
+            "domain": [
+                "AI"
+            ],
+            "eventDates": [
+                "2026-04-03T13:27:12.717Z"
+            ],
+            "eventName": "IEEE",
+            "location": "Bangalore",
+            "publisher": "IEEE",
+            "photos": [],
+            "pdf": "p1.pdf",
+            "status": "Published",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.718Z",
+            "updatedAt": "2026-04-03T13:27:12.718Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f2fe",
+            "staff": "69cfc030084eb126c305f2ed",
+            "topic": "IoT Paper",
+            "domain": [
+                "IoT"
+            ],
+            "eventDates": [
+                "2026-04-03T13:27:12.717Z"
+            ],
+            "eventName": "IoT Summit",
+            "location": "Hyderabad",
+            "publisher": "ACM",
+            "photos": [],
+            "pdf": "p5.pdf",
+            "status": "Published",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.719Z",
+            "updatedAt": "2026-04-05T11:06:11.437Z"
+        }
+    ]
+}
+
+Name : getPaperByStaffId
+Route : http://localhost:3000/paper/:staffId
+Type : Get 
+Function : Gives Papers for particular staff by their Id as input
+req : http://localhost:3000/paper/PROF001
+{
+    "user": hve to chk
+}
+res : 200
+{
+    "count": 2,
+    "data": [
+        {
+            "_id": "69cfc030084eb126c305f2fa",
+            "staff": "69cfc030084eb126c305f2ed",
+            "topic": "AI Paper",
+            "domain": [
+                "AI"
+            ],
+            "eventDates": [
+                "2026-04-03T13:27:12.717Z"
+            ],
+            "eventName": "IEEE",
+            "location": "Bangalore",
+            "publisher": "IEEE",
+            "photos": [],
+            "pdf": "p1.pdf",
+            "status": "Published",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.718Z",
+            "updatedAt": "2026-04-03T13:27:12.718Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f2fe",
+            "staff": "69cfc030084eb126c305f2ed",
+            "topic": "IoT Paper",
+            "domain": [
+                "IoT"
+            ],
+            "eventDates": [
+                "2026-04-03T13:27:12.717Z"
+            ],
+            "eventName": "IoT Summit",
+            "location": "Hyderabad",
+            "publisher": "ACM",
+            "photos": [],
+            "pdf": "p5.pdf",
+            "status": "Published",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.719Z",
+            "updatedAt": "2026-04-05T11:06:11.437Z"
+        }
+    ]
+}
+
+Name : createPaper
+Route : http://localhost:3000/paper/newPaper
+Type : Post
+Function : Creates a new Entry of Paper
+req : 
+{
+    "staffId": "PROF001",
+    "topic": "CC Paper",
+    "domain": ["CC"],
+    "eventDates": ["2026-04-03T13:27:12.706Z"],
+    "eventName": "IEEE",
+    "location": "Bangalore",
+    "publisher": "IEEE",
+    "pdf": "p7.pdf",
+    "status": "Published"
+}
+res : 201
+
+Patent - 
+Name : getAllPatent
+Route : http://localhost:3000/patent/allPatents
+Type : Get 
+Function : Gives all the Patents
+req :
+{
+    "user" : hve to chk
+}
+res : 200
+{
+    "count": 6,
+    "data": [
+        {
+            "_id": "69cfc030084eb126c305f301",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ed",
+                "staffId": "PROF001",
+                "role": "Prof"
+            },
+            "topic": "AI Patent",
+            "domain": [
+                "AI"
+            ],
+            "date": "2026-04-03T13:27:12.725Z",
+            "pdf": "pat1.pdf",
+            "status": "Accepted",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.727Z",
+            "updatedAt": "2026-04-03T13:27:12.727Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f302",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ee",
+                "staffId": "PROF002",
+                "role": "Prof"
+            },
+            "topic": "Security Patent",
+            "domain": [
+                "Security"
+            ],
+            "date": "2026-04-03T13:27:12.725Z",
+            "pdf": "pat2.pdf",
+            "status": "Accepted",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.727Z",
+            "updatedAt": "2026-04-05T11:15:44.576Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f303",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ef",
+                "staffId": "PROF003",
+                "role": "Prof"
+            },
+            "topic": "Cloud Patent",
+            "domain": [
+                "Cloud"
+            ],
+            "date": "2026-04-03T13:27:12.725Z",
+            "pdf": "pat3.pdf",
+            "status": "Grant",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.727Z",
+            "updatedAt": "2026-04-03T13:27:12.727Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f304",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2f0",
+                "staffId": "PROF004",
+                "role": "Prof"
+            },
+            "topic": "DS Patent",
+            "domain": [
+                "DS"
+            ],
+            "date": "2026-04-03T13:27:12.725Z",
+            "pdf": "pat4.pdf",
+            "status": "Accepted",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.727Z",
+            "updatedAt": "2026-04-03T13:27:12.727Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f305",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ed",
+                "staffId": "PROF001",
+                "role": "Prof"
+            },
+            "topic": "IoT Patent",
+            "domain": [
+                "IoT"
+            ],
+            "date": "2026-04-03T13:27:12.725Z",
+            "status": "On Hold",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.727Z",
+            "updatedAt": "2026-04-03T13:27:12.727Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f306",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ee",
+                "staffId": "PROF002",
+                "role": "Prof"
+            },
+            "topic": "Blockchain Patent",
+            "domain": [
+                "Blockchain"
+            ],
+            "date": "2026-04-03T13:27:12.725Z",
+            "pdf": "pat6.pdf",
+            "status": "Accepted",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.727Z",
+            "updatedAt": "2026-04-03T13:27:12.727Z"
+        }
+    ]
+}
+
+Name : gerPatentByStaffName
+Route : http://localhost:3000/patent/patentByStaffName
+Type : Get 
+Function : Gives Patents for particular staff by their Name as input
+req : http://localhost:3000/patent/patentByStaffName?name=Dr A
+{
+    "user" : hve to chk
+}
+res : 200
+{
+    "count": 2,
+    "data": [
+        {
+            "_id": "69cfc030084eb126c305f301",
+            "staff": "69cfc030084eb126c305f2ed",
+            "topic": "AI Patent",
+            "domain": [
+                "AI"
+            ],
+            "date": "2026-04-03T13:27:12.725Z",
+            "pdf": "pat1.pdf",
+            "status": "Accepted",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.727Z",
+            "updatedAt": "2026-04-03T13:27:12.727Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f305",
+            "staff": "69cfc030084eb126c305f2ed",
+            "topic": "IoT Patent",
+            "domain": [
+                "IoT"
+            ],
+            "date": "2026-04-03T13:27:12.725Z",
+            "pdf": "pat5.pdf",
+            "status": "On Hold",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.727Z",
+            "updatedAt": "2026-04-03T13:27:12.727Z"
+        }
+    ]
+}
+
+Name : getPatentByStaffId
+Route : http://localhost:3000/patent/:staffId
+Type : Get 
+Function : Gives Patents for particular staff by their Id as input
+req : http://localhost:3000/patent/PROF001
+res : 200
+{
+    "count": 2,
+    "data": [
+        {
+            "_id": "69cfc030084eb126c305f301",
+            "staff": "69cfc030084eb126c305f2ed",
+            "topic": "AI Patent",
+            "domain": [
+                "AI"
+            ],
+            "date": "2026-04-03T13:27:12.725Z",
+            "pdf": "pat1.pdf",
+            "status": "Accepted",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.727Z",
+            "updatedAt": "2026-04-03T13:27:12.727Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f305",
+            "staff": "69cfc030084eb126c305f2ed",
+            "topic": "IoT Patent",
+            "domain": [
+                "IoT"
+            ],
+            "date": "2026-04-03T13:27:12.725Z",
+            "pdf": "pat5.pdf",
+            "status": "On Hold",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.727Z",
+            "updatedAt": "2026-04-03T13:27:12.727Z"
+        }
+    ]
+}
+
+Name : createPatent
+Route : http://localhost:3000/patent/newPatent
+Type : Post
+Function : Creates a New Entry of Patent
+req : 
+{
+    "staffId": "PROF001",
+    "topic": "CC Patent",
+    "domain": ["CC"],
+    "date": "2026-04-03T13:27:12.706Z",
+    "pdf": "pat7.pdf",
+    "status": "Accepted"
+}
+res : 201
+
