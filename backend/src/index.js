@@ -1,6 +1,5 @@
 import express from "express";
 import mongoose from "mongoose";
-import path from "path";
 
 import { adminRoutes } from "./Routes/adminRoutes.js";
 import { fdpRoutes } from "./Routes/fdpRoutes.js";

@@ -10,11 +10,23 @@ const getPaperByStaffId = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     const data = await Paper.find({ staff: user._id });
+
+    const currentUser = req.user;
+    const isOwner = data.staff.staffId === currentUser.staffId;
+    const isAdmin = currentUser.role === "Admin";
+
+    if(data.status === "On Hold" && !isOwner){
+      delete data.pdf;
+    }
+
+    if(!isAdmin) {
+      delete data.bill;
+    }
     res.status(200).json({
       count: data.length,
       data
     });
-  } 
+  }
   catch (err) {
     console.log(err);
     res.status(500).json({ message: "Server error" });
@@ -54,9 +66,27 @@ const createPaper = async (req, res) => {
 const getAllPaper = async (req, res) => {
   try {
     const data = await Paper.find().populate("staff", "staffId role");
+    
+    const currentUser = req.user;
+
+    const filtered = data.map(paper=>{
+      const isOwner = paper.staff.staffId === currentUser.staffId;
+      const isAdmin = currentUser.role === "Admin";
+
+      let obj=paper.toObject();
+
+      if(obj.status === "On Hold" && !isOwner){
+        delete obj.pdf;
+      }
+
+      if(!isAdmin) {
+        delete obj.bill;
+      }
+      return obj;
+    });
     res.status(200).json({
-      count: data.length,
-      data
+      count: filtered.length,
+      data: filtered
     });
   } 
   catch (err) {
@@ -77,15 +107,26 @@ const getPaperByStaffName = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     const data = await Paper.find({ staff: user._id });
+    const currentUser = req.user;
+    const isOwner = data.staff.staffId === currentUser.staffId;
+    const isAdmin = currentUser.role === "Admin";
+
+    if(data.status === "On Hold" && !isOwner){
+      delete data.pdf;
+    }
+
+    if(!isAdmin) {
+      delete data.bill;
+    }
     res.status(200).json({
       count: data.length,
       data
     });
-   } 
-   catch (err) {
+  }
+  catch (err) {
     console.log(err);
     res.status(500).json({ message: "Server error" });
-   }
+  }
 };
 
 export {createPaper,getAllPaper,getPaperByStaffId,getPaperByStaffName}
