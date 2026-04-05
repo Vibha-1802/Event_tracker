@@ -8,6 +8,7 @@ import { patentRoutes } from "./Routes/patentRoutes.js";
 import { profileRoutes } from "./Routes/profileRoutes.js";
 import { socialServiceRoutes } from "./Routes/socialServiceRoutes.js";
 import { userRoutes } from "./Routes/userRoutes.js";
+import { combinedRoutes } from "./Routes/combinedRoutes.js";
 
 
 const app = express();
@@ -33,6 +34,7 @@ app.use('/patent',patentRoutes)
 app.use('/profile',profileRoutes)
 app.use('/socialservice',socialServiceRoutes)
 app.use('/users',userRoutes)
+app.use('/combined',combinedRoutes)
 
 app.listen(3000, () => {
     console.log("APP IS LISTENING ON PORT 3000!")
