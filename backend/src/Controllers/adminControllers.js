@@ -1,5 +1,6 @@
 import { Paper } from "../Models/paperModel.js"
 import { Patent } from "../Models/patentModel.js"
+import mongoose from "mongoose"
 
 const changeStatusPaper = async (req, res) => {
   try {
@@ -49,4 +50,37 @@ const changeStatusPatent = async (req, res) => {
   }
 };
 
-export { changeStatusPaper,changeStatusPatent }
+const getOnHoldPapers = async (req, res) => {
+  try{
+    const data = await Paper.find().populate("staff", "staffId role");
+
+    const filtered = data.map(paper => paper.toObject()).filter(obj => obj.status === "On Hold");
+    res.status(200).json({
+      count: filtered.length,
+      data: filtered
+    });
+  } 
+  catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+const getOnHoldPatents = async (req, res) => {
+  try{
+    const data = await Patent.find().populate("staff", "staffId role");
+
+    const filtered = data.map(patent => patent.toObject()).filter(obj => obj.status === "On Hold");
+
+    res.status(200).json({
+      count: filtered.length,
+      data: filtered
+    });
+  } 
+  catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export { changeStatusPaper,changeStatusPatent,getOnHoldPapers,getOnHoldPatents }

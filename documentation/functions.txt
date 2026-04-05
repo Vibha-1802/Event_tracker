@@ -1,0 +1,156 @@
+Backend sever is running on :
+http://localhost:3000/
+
+Routes :
+http://localhost:3000/authenticate
+http://localhost:3000/admin
+http://localhost:3000/fdp
+http://localhost:3000/paper
+http://localhost:3000/patent
+http://localhost:3000/profile
+http://localhost:3000/socialservice
+http://localhost:3000/users
+http://localhost:3000/combined
+
+Authenicate - 
+Name : null
+Route : http://localhost:3000/authenticate
+Type : Post
+Function : login and checking of password
+req :
+{
+  "staffId": "ADMIN001",
+  "password": "admin123"
+}
+res : Login success: ADMIN001 (Admin)
+
+Admin - 
+Name : getOnHoldPapers
+Route : http://localhost:3000/admin/OnHoldPapers
+Type : Get 
+Function : Gives all the On Hold Papers
+req : null
+res :
+{
+    "count": 2,
+    "data": [
+        {
+            "_id": "69cfc030084eb126c305f2fb",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ee",
+                "staffId": "PROF002",
+                "role": "Prof"
+            },
+            "topic": "Security Paper",
+            "domain": [
+                "Security"
+            ],
+            "eventDates": [
+                "2026-04-03T13:27:12.717Z"
+            ],
+            "eventName": "CyberConf",
+            "location": "Delhi",
+            "publisher": "Springer",
+            "photos": [],
+            "pdf": "p2.pdf",
+            "status": "On Hold",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.718Z",
+            "updatedAt": "2026-04-03T13:27:12.718Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f2fe",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ed",
+                "staffId": "PROF001",
+                "role": "Prof"
+            },
+            "topic": "IoT Paper",
+            "domain": [
+                "IoT"
+            ],
+            "eventDates": [
+                "2026-04-03T13:27:12.717Z"
+            ],
+            "eventName": "IoT Summit",
+            "location": "Hyderabad",
+            "publisher": "ACM",
+            "photos": [],
+            "pdf": "p5.pdf",
+            "status": "On Hold",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.719Z",
+            "updatedAt": "2026-04-03T13:27:12.719Z"
+        }
+    ]
+}
+
+Name : getOnHoldPatents
+Route : http://localhost:3000/admin/OnHoldPatents
+Type : Get 
+Function : Gives all the On Hold Patents 
+req : null
+res : 
+{
+    "count": 2,
+    "data": [
+        {
+            "_id": "69cfc030084eb126c305f302",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ee",
+                "staffId": "PROF002",
+                "role": "Prof"
+            },
+            "topic": "Security Patent",
+            "domain": [
+                "Security"
+            ],
+            "date": "2026-04-03T13:27:12.725Z",
+            "pdf": "pat2.pdf",
+            "status": "On Hold",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.727Z",
+            "updatedAt": "2026-04-03T13:27:12.727Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f305",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ed",
+                "staffId": "PROF001",
+                "role": "Prof"
+            },
+            "topic": "IoT Patent",
+            "domain": [
+                "IoT"
+            ],
+            "date": "2026-04-03T13:27:12.725Z",
+            "pdf": "pat5.pdf",
+            "status": "On Hold",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.727Z",
+            "updatedAt": "2026-04-03T13:27:12.727Z"
+        }
+    ]
+}
+
+Name : changeStatusPaper
+Route : http://localhost:3000/admin/statusPaper
+Type : Post
+Function : only open for admin to change the Paper status - use the getOnHoldPapers function to display only on Hold Papers to the admin
+req : 
+{
+    "paperId": "69cfc030084eb126c305f2fe",
+    "status": "Published"
+}
+res : 200
+
+Name : changeStatusPatent
+Route : http://localhost:3000/admin/statusPatent
+Type : Post
+Function : only open for admin to change the Patent status - use the getOnHoldPatents function to display only on Hold Patents to the admin
+req : 
+{
+    "patentId": "69cfc030084eb126c305f302",
+    "status": "Accepted"
+}
+res : 200`
