@@ -3,8 +3,8 @@ import { getAllData,getAllDataByStaffId,getAllDataByStaffName } from "../Control
 
 const combinedRoutes = express.Router();
 
-combinedRoutes.get("/allPapers",getAllData);
-combinedRoutes.get("/paperByStaffName",getAllDataByStaffName);
+combinedRoutes.get("/all",getAllData);
+combinedRoutes.get("/allByStaffName",getAllDataByStaffName);
 combinedRoutes.get("/:staffId",getAllDataByStaffId);
 
 export {combinedRoutes}

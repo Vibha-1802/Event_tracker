@@ -9,6 +9,7 @@ import { profileRoutes } from "./Routes/profileRoutes.js";
 import { socialServiceRoutes } from "./Routes/socialServiceRoutes.js";
 import { userRoutes } from "./Routes/userRoutes.js";
 import { combinedRoutes } from "./Routes/combinedRoutes.js";
+import { authenticateRoutes } from "./Routes/authenticateRoutes.js";
 
 
 const app = express();
@@ -27,6 +28,7 @@ app.get('/', (req, res) => {
     res.send("Server running");
 });
 
+app.use('/authenticate',authenticateRoutes)
 app.use('/admin',adminRoutes)
 app.use('/fdp',fdpRoutes)
 app.use('/paper',paperRoutes)
