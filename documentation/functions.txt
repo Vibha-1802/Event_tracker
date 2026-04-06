@@ -573,7 +573,7 @@ res :
     ]
 }
 
-Name : gerPaperByStaffName
+Name : getPaperByStaffName
 Route : http://localhost:3000/paper/paperByStaffName
 Type : Get 
 Function : Gives Papers for particular staff by their Name as input
@@ -824,7 +824,7 @@ res : 200
     ]
 }
 
-Name : gerPatentByStaffName
+Name : getPatentByStaffName
 Route : http://localhost:3000/patent/patentByStaffName
 Type : Get 
 Function : Gives Patents for particular staff by their Name as input
@@ -921,4 +921,471 @@ req :
     "status": "Accepted"
 }
 res : 201
+
+Profile - 
+Name : getAllProfile
+Route : http://localhost:3000/profile/allProfiles
+Type : Get 
+Function : Gives all the Profiles
+req : null
+res : 200
+{
+    "count": 4,
+    "data": [
+        {
+            "_id": "69cfc030084eb126c305f308",
+            "staffId": "PROF001",
+            "name": "Dr A",
+            "age": 35,
+            "phoneNumber": 9999999991,
+            "gmail": "a@gmail.com",
+            "designation": "Prof",
+            "department": "CSE",
+            "expertise": [
+                "AI"
+            ],
+            "joiningDate": "2026-04-03T13:27:12.730Z",
+            "photo": "p1.jpg",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.733Z",
+            "updatedAt": "2026-04-03T13:27:12.733Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f309",
+            "staffId": "PROF002",
+            "name": "Dr B",
+            "age": 36,
+            "phoneNumber": 9999999992,
+            "gmail": "b@gmail.com",
+            "designation": "Asst Prof",
+            "department": "CSE",
+            "expertise": [
+                "Security"
+            ],
+            "joiningDate": "2026-04-03T13:27:12.730Z",
+            "photo": "p2.jpg",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.733Z",
+            "updatedAt": "2026-04-03T13:27:12.733Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f30a",
+            "staffId": "PROF003",
+            "name": "Dr C",
+            "age": 40,
+            "phoneNumber": 9999999993,
+            "gmail": "c@gmail.com",
+            "designation": "Prof",
+            "department": "IT",
+            "expertise": [
+                "Cloud"
+            ],
+            "joiningDate": "2026-04-03T13:27:12.730Z",
+            "photo": "p3.jpg",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.734Z",
+            "updatedAt": "2026-04-03T13:27:12.734Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f30b",
+            "staffId": "PROF004",
+            "name": "Dr D",
+            "age": 38,
+            "phoneNumber": 9999999994,
+            "gmail": "d@gmail.com",
+            "designation": "HOD",
+            "department": "ECE",
+            "expertise": [
+                "IoT"
+            ],
+            "joiningDate": "2026-04-03T13:27:12.730Z",
+            "photo": "p4.jpg",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.734Z",
+            "updatedAt": "2026-04-03T13:27:12.734Z"
+        }
+    ]
+}
+
+Name : getProfileByStaffName
+Route : http://localhost:3000/profile/profiletByStaffName
+Type : Get 
+Function : Gives Profiles for particular staff by their Name as input
+req : http://localhost:3000/profile/profileByStaffName?name=Dr A
+res : 200
+{
+    "data": {
+        "_id": "69cfc030084eb126c305f308",
+        "staffId": "PROF001",
+        "name": "Dr A",
+        "age": 35,
+        "phoneNumber": 9999999991,
+        "gmail": "a@gmail.com",
+        "designation": "Prof",
+        "department": "CSE",
+        "expertise": [
+            "AI"
+        ],
+        "joiningDate": "2026-04-03T13:27:12.730Z",
+        "photo": "p1.jpg",
+        "__v": 0,
+        "createdAt": "2026-04-03T13:27:12.733Z",
+        "updatedAt": "2026-04-03T13:27:12.733Z"
+    }
+}
+
+Name : getProfileByStaffId
+Route : http://localhost:3000/profile/:staffId
+Type : Get 
+Function : Gives Profiles for particular staff by their Id as input
+req : http://localhost:3000/profile/PROF001
+res : 200
+{
+    "count": 1,
+    "data": [
+        {
+            "_id": "69cfc030084eb126c305f308",
+            "staffId": "PROF001",
+            "name": "Dr A",
+            "age": 35,
+            "phoneNumber": 9999999991,
+            "gmail": "a@gmail.com",
+            "designation": "Prof",
+            "department": "CSE",
+            "expertise": [
+                "AI"
+            ],
+            "joiningDate": "2026-04-03T13:27:12.730Z",
+            "photo": "p1.jpg",
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.733Z",
+            "updatedAt": "2026-04-03T13:27:12.733Z"
+        }
+    ]
+}
+
+Name : createProfile
+Route : http://localhost:3000/profile/newProfile
+Type : Post
+Function : Creates a New Entry of Profile
+req : createUser has to be done first for this function to work and only works for creation of new Prof Profiles
+{
+    "staffId": "PROF007",
+    "name": "Dr E",
+    "age": 35,
+    "phoneNumber": 9999999991,
+    "gmail": "e@gmail.com",
+    "designation": "Prof",
+    "department": "CSE",
+    "expertise": ["AI"],
+    "joiningDate": "2026-04-03T13:27:12.730Z",
+    "photo": "p5.jpg"
+}
+res : 201
+{
+    "message": "Profile created",
+    "data": {
+        "staffId": "PROF007",
+        "name": "Dr E",
+        "age": 35,
+        "phoneNumber": 9999999991,
+        "gmail": "e@gmail.com",
+        "designation": "Prof",
+        "department": "CSE",
+        "expertise": [
+            "AI"
+        ],
+        "joiningDate": "2026-04-03T13:27:12.730Z",
+        "photo": "p5.jpg",
+        "_id": "69d3e269ebfbed66e55dcaf1",
+        "createdAt": "2026-04-06T16:42:17.829Z",
+        "updatedAt": "2026-04-06T16:42:17.829Z",
+        "__v": 0
+    }
+}
+
+Social Service - 
+Name : getAllSocialService
+Route : http://localhost:3000/socialservice/allSocialServices
+Type : Get 
+Function : Gives all the Social Services
+req : null
+res : 200
+{
+    "count": 6,
+    "data": [
+        {
+            "_id": "69cfc030084eb126c305f30d",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ed",
+                "staffId": "PROF001",
+                "role": "Prof"
+            },
+            "dates": [
+                "2026-04-03T13:27:12.738Z"
+            ],
+            "location": "Village A",
+            "certificate": "c1.pdf",
+            "photos": [
+                "img1.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.740Z",
+            "updatedAt": "2026-04-03T13:27:12.740Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f30e",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ee",
+                "staffId": "PROF002",
+                "role": "Prof"
+            },
+            "dates": [
+                "2026-04-03T13:27:12.738Z"
+            ],
+            "location": "Village B",
+            "certificate": "c2.pdf",
+            "photos": [
+                "img2.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.740Z",
+            "updatedAt": "2026-04-03T13:27:12.740Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f30f",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ef",
+                "staffId": "PROF003",
+                "role": "Prof"
+            },
+            "dates": [
+                "2026-04-03T13:27:12.738Z"
+            ],
+            "location": "Village C",
+            "certificate": "c3.pdf",
+            "photos": [
+                "img3.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.740Z",
+            "updatedAt": "2026-04-03T13:27:12.740Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f310",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2f0",
+                "staffId": "PROF004",
+                "role": "Prof"
+            },
+            "dates": [
+                "2026-04-03T13:27:12.738Z"
+            ],
+            "location": "Village D",
+            "certificate": "c4.pdf",
+            "photos": [
+                "img4.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.740Z",
+            "updatedAt": "2026-04-03T13:27:12.740Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f311",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ed",
+                "staffId": "PROF001",
+                "role": "Prof"
+            },
+            "dates": [
+                "2026-04-03T13:27:12.738Z"
+            ],
+            "location": "Village E",
+            "certificate": "c5.pdf",
+            "photos": [
+                "img5.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.741Z",
+            "updatedAt": "2026-04-03T13:27:12.741Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f312",
+            "staff": {
+                "_id": "69cfc030084eb126c305f2ee",
+                "staffId": "PROF002",
+                "role": "Prof"
+            },
+            "dates": [
+                "2026-04-03T13:27:12.738Z"
+            ],
+            "location": "Village F",
+            "certificate": "c6.pdf",
+            "photos": [
+                "img6.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.741Z",
+            "updatedAt": "2026-04-03T13:27:12.741Z"
+        }
+    ]
+}
+
+Name : getSocialServiceByStaffName
+Route : http://localhost:3000/socialservice/socialServiceByStaffName
+Type : Get 
+Function : Gives Social Service for particular staff by their Name as input
+req : http://localhost:3000/socialservice/socialServiceByStaffName?name=Dr A
+res : 200
+{
+    "count": 2,
+    "data": [
+        {
+            "_id": "69cfc030084eb126c305f30d",
+            "staff": "69cfc030084eb126c305f2ed",
+            "dates": [
+                "2026-04-03T13:27:12.738Z"
+            ],
+            "location": "Village A",
+            "certificate": "c1.pdf",
+            "photos": [
+                "img1.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.740Z",
+            "updatedAt": "2026-04-03T13:27:12.740Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f311",
+            "staff": "69cfc030084eb126c305f2ed",
+            "dates": [
+                "2026-04-03T13:27:12.738Z"
+            ],
+            "location": "Village E",
+            "certificate": "c5.pdf",
+            "photos": [
+                "img5.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.741Z",
+            "updatedAt": "2026-04-03T13:27:12.741Z"
+        }
+    ]
+}
+
+Name : getSocialServiceByStaffId
+Route : http://localhost:3000/socialservice/:staffId
+Type : Get 
+Function : Gives Social Services for particular staff by their Id as input
+req : http://localhost:3000/socialservice/PROF001
+res : 200
+{
+    "count": 2,
+    "data": [
+        {
+            "_id": "69cfc030084eb126c305f30d",
+            "staff": "69cfc030084eb126c305f2ed",
+            "dates": [
+                "2026-04-03T13:27:12.738Z"
+            ],
+            "location": "Village A",
+            "certificate": "c1.pdf",
+            "photos": [
+                "img1.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.740Z",
+            "updatedAt": "2026-04-03T13:27:12.740Z"
+        },
+        {
+            "_id": "69cfc030084eb126c305f311",
+            "staff": "69cfc030084eb126c305f2ed",
+            "dates": [
+                "2026-04-03T13:27:12.738Z"
+            ],
+            "location": "Village E",
+            "certificate": "c5.pdf",
+            "photos": [
+                "img5.jpg"
+            ],
+            "__v": 0,
+            "createdAt": "2026-04-03T13:27:12.741Z",
+            "updatedAt": "2026-04-03T13:27:12.741Z"
+        }
+    ]
+}
+
+Name : createSocialService
+Route : http://localhost:3000/socialservice/newSocialService
+Type : Post
+Function : Creates a New Entry of Social Service
+req : 
+{
+    "staffId": "PROF001",
+    "dates": "2026-04-03T13:27:12.730Z",
+    "location": "Village A",
+    "certificate": "c7.pdf",
+    "photos": "img7.jpg"
+}
+res : 201
+{
+    "message": "Social Service created",
+    "data": {
+        "staff": "69cfc030084eb126c305f2ed",
+        "dates": [
+            "2026-04-03T13:27:12.730Z"
+        ],
+        "location": "Village A",
+        "certificate": "c7.pdf",
+        "photos": [
+            "img7.jpg"
+        ],
+        "_id": "69d3dcaa8c77ac0d98c13759",
+        "createdAt": "2026-04-06T16:17:46.460Z",
+        "updatedAt": "2026-04-06T16:17:46.460Z",
+        "__v": 0
+    }
+}
+
+User - 
+Name : getObjectIdByStaffId
+Route : http://localhost:3000/users/:staffId
+Type : Get 
+Function : Gives ObjectId for particular staff by their Id as input
+req : http://localhost:3000/users/PROF001
+res : 200
+{
+    "staffId": "PROF001",
+    "objectId": "69cfc030084eb126c305f2ed"
+}
+
+Name : createUser
+Route : http://localhost:3000/users/newUser
+Type : Post
+Function : Creates a New Entry of User
+req : 
+{
+    "staffId": "PROF007",
+    "password": "hi", 
+    "role": "Prof"
+}
+res : 201
+{
+    "message": "User created successfully",
+    "staffId": "PROF007"
+}
+
+Name : changePassword
+Route : http://localhost:3000/users/newPassword
+Type : Post
+Function : Creates a New Password for a User
+req : 
+{
+    "staffId": "PROF007",
+    "newPassword": "hello"
+}
+res : 200
+{
+    "message": "Password updated successfully"
+}
 

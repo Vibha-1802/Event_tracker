@@ -3,7 +3,7 @@ import {createUser,getObjectIdByStaffId,changePassword} from "../Controllers/use
 
 const userRoutes = express.Router();
 
-userRoutes.get("/objectIdByStaffId",getObjectIdByStaffId);
+userRoutes.get("/:staffId",getObjectIdByStaffId);
 userRoutes.post("/newUser",createUser);
 userRoutes.post("/newPassword",changePassword);
 
