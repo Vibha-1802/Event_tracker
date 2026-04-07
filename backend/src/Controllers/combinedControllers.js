@@ -9,8 +9,8 @@ const filterPaper = (paper, currentUser) => {
   return paper.map(p => {
     let obj = p.toObject();
 
-    const isOwner = obj.staff?.staffId === currentUser.staffId;
-    const isAdmin = currentUser.role === "Admin";
+    const isOwner = obj.staff?.staffId === currentUser?.staffId;
+    const isAdmin = currentUser?.role === "Admin";
 
     if (obj.status === "On Hold" && !isOwner) {
       delete obj.pdf;
@@ -27,8 +27,8 @@ const filterPaper = (paper, currentUser) => {
 const filterPatent = (patent, currentUser) => {
   return patent.map(p => {
     let obj = p.toObject();
-    const isOwner = obj.staff?.staffId === currentUser.staffId;
-    const isAdmin = currentUser.role === "Admin";
+    const isOwner = obj.staff?.staffId === currentUser?.staffId;
+    const isAdmin = currentUser?.role === "Admin";
 
     if (obj.status === "On Hold" && !isOwner && !isAdmin) {
       delete obj.pdf;
@@ -53,15 +53,53 @@ const getAllData = async (req, res) => {
 
     const filteredPaper = filterPaper(paper, currentUser);
     const filteredPatent = filterPatent(patent, currentUser);
+    const result = {};
+    const initStaff = (staffId) => {
+      if (!result[staffId]) {
+        result[staffId] = {
+          fdp: [],
+          paper: [],
+          patent: [],
+          profile: null,
+          socialService: []
+        };
+      }
+    };
 
-    res.status(200).json({
-      fdp,
-      paper: filteredPaper,
-      patent: filteredPatent,
-      profile,
-      socialService: social
+    fdp.forEach(item => {
+      if (!item.staff) return;
+      const staffId = item.staff.staffId;
+      initStaff(staffId);
+      result[staffId].fdp.push(item);
     });
 
+    filteredPaper.forEach(item => {
+      if (!item.staff) return;
+      const staffId = item.staff.staffId;
+      initStaff(staffId);
+      result[staffId].paper.push(item);
+    });
+
+    filteredPatent.forEach(item => {
+      if (!item.staff) return;
+      const staffId = item.staff.staffId;
+      initStaff(staffId);
+      result[staffId].patent.push(item);
+    });
+
+    social.forEach(item => {
+      if (!item.staff) return;
+      const staffId = item.staff.staffId;
+      initStaff(staffId);
+      result[staffId].socialService.push(item);
+    });
+
+    profile.forEach(item => {
+      const staffId = item.staffId;
+      initStaff(staffId);
+      result[staffId].profile = item;
+    });
+    res.status(200).json(result);
    } 
    catch (err) {
     console.log(err);
