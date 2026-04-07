@@ -12,19 +12,23 @@ const getPaperByStaffId = async (req, res) => {
     const data = await Paper.find({ staff: user._id });
 
     const currentUser = req.user;
-    const isOwner = data.staff?.staffId === currentUser?.staffId;
+    const isOwner = user.staffId === currentUser?.staffId;
     const isAdmin = currentUser?.role === "Admin";
 
-    if(data.status === "On Hold" && !isOwner && !isAdmin){
-      delete data.pdf;
-    }
+    const filtered = data.map(paper => {
+      const obj = paper.toObject();
+      if(obj.status === "On Hold" && !isOwner && !isAdmin){
+        delete obj.pdf;
+      }
+      if(!isAdmin) {
+        delete obj.bill;
+      }
+      return obj;
+    });
 
-    if(!isAdmin) {
-      delete data.bill;
-    }
     res.status(200).json({
-      count: data.length,
-      data
+      count: filtered.length,
+      data: filtered
     });
   }
   catch (err) {
@@ -105,19 +109,23 @@ const getPaperByStaffName = async (req, res) => {
     }
     const data = await Paper.find({ staff: user._id });
     const currentUser = req.user;
-    const isOwner = data.staff?.staffId === currentUser?.staffId;
+    const isOwner = user.staffId === currentUser?.staffId;
     const isAdmin = currentUser?.role === "Admin";
 
-    if(data.status === "On Hold" && !isOwner && !isAdmin){
-      delete data.pdf;
-    }
+    const filtered = data.map(paper => {
+      const obj = paper.toObject();
+      if(obj.status === "On Hold" && !isOwner && !isAdmin){
+        delete obj.pdf;
+      }
+      if(!isAdmin) {
+        delete obj.bill;
+      }
+      return obj;
+    });
 
-    if(!isAdmin) {
-      delete data.bill;
-    }
     res.status(200).json({
-      count: data.length,
-      data
+      count: filtered.length,
+      data: filtered
     });
   }
   catch (err) {

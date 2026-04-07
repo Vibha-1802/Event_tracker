@@ -1,0 +1,80 @@
+.data-table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 1.5rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.data-table th {
+  padding: 1rem;
+  background: hsla(240, 10%, 15%, 0.8);
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-bottom: 2px solid hsla(0, 0%, 100%, 0.05);
+}
+
+.data-table td {
+  padding: 1rem;
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.05);
+  color: var(--text-primary);
+}
+
+.data-table tbody tr {
+  transition: all var(--transition-fast);
+}
+
+.data-table tbody tr:hover {
+  background: hsla(240, 100%, 65%, 0.05);
+}
+
+.status-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.status-published, .status-accepted, .status-grant {
+  background: hsla(145, 80%, 40%, 0.15);
+  color: hsl(145, 80%, 60%);
+}
+
+.status-on-hold {
+  background: hsla(45, 80%, 40%, 0.15);
+  color: hsl(45, 80%, 60%);
+}
+
+.action-btn {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+}
+
+.action-btn:hover {
+  background: var(--primary-light);
+  transform: translateY(-1px);
+}
+
+.action-btn-danger {
+  background: hsl(0, 80%, 50%);
+}
+
+.action-btn-danger:hover {
+  background: hsl(0, 80%, 60%);
+}
+
+.page-header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

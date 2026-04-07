@@ -34,6 +34,11 @@ const authenticate = async (req, res) => {
     };
 
     console.log(`Login success: ${user.staffId} (${user.role})`);
+    
+    return res.status(200).json({
+      message: "Login success",
+      user: req.user
+    });
 
    } 
    catch (err) {

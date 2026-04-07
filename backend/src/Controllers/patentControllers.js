@@ -12,15 +12,19 @@ const getPatentByStaffId = async (req, res) => {
     const data = await Patent.find({ staff: user._id });
 
     const currentUser = req.user;
-    const isOwner = data.staff?.staffId === currentUser?.staffId;
+    const isOwner = user.staffId === currentUser?.staffId;
 
-    if (data.status === "On Hold" && !isOwner) {
-        delete data.pdf;
+    const filtered = data.map(patent => {
+      const obj = patent.toObject();
+      if (obj.status === "On Hold" && !isOwner) {
+        delete obj.pdf;
       }
+      return obj;
+    });
 
     res.status(200).json({
-      count: data.length,
-      data
+      count: filtered.length,
+      data: filtered
     });
   } 
   catch (err) {
@@ -97,15 +101,19 @@ const getPatentByStaffName = async (req, res) => {
     }
     const data = await Patent.find({ staff: user._id });
     const currentUser = req.user;
-    const isOwner = data.staff?.staffId === currentUser?.staffId;
+    const isOwner = user.staffId === currentUser?.staffId;
 
-    if (data.status === "On Hold" && !isOwner) {
-        delete data.pdf;
+    const filtered = data.map(patent => {
+      const obj = patent.toObject();
+      if (obj.status === "On Hold" && !isOwner) {
+        delete obj.pdf;
       }
+      return obj;
+    });
 
     res.status(200).json({
-      count: data.length,
-      data
+      count: filtered.length,
+      data: filtered
     });
    } 
    catch (err) {
