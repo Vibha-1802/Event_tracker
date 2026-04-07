@@ -37,12 +37,30 @@ const Admin = () => {
     }
   };
 
+  const handleRejectPaper = async (id) => {
+    try {
+      await adminAPI.changePaperStatus(id, 'Rejected');
+      fetchHoldItems();
+    } catch (err) {
+      console.error("Failed to reject paper", err);
+    }
+  };
+
   const handleApprovePatent = async (id) => {
     try {
       await adminAPI.changePatentStatus(id, 'Accepted');
       fetchHoldItems();
     } catch (err) {
       console.error("Failed to approve patent", err);
+    }
+  };
+
+  const handleRejectPatent = async (id) => {
+    try {
+      await adminAPI.changePatentStatus(id, 'Rejected');
+      fetchHoldItems();
+    } catch (err) {
+      console.error("Failed to reject patent", err);
     }
   };
 
@@ -65,6 +83,7 @@ const Admin = () => {
                 <th>Staff ID</th>
                 <th>Event Name</th>
                 <th>Current Status</th>
+                <th>Files</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -78,12 +97,23 @@ const Admin = () => {
                     <span className="status-badge status-on-hold">{paper.status}</span>
                   </td>
                   <td>
-                    <button className="action-btn" onClick={() => handleApprovePaper(paper._id)}>Approve</button>
+                    <div style={{display: 'flex', gap: '8px', flexWrap: 'wrap'}}>
+                      {paper.pdf && <a href={paper.pdf} target="_blank" rel="noreferrer" className="text-secondary" style={{textDecoration: 'underline', fontSize: '0.85rem'}}>PDF</a>}
+                      {paper.certificate && <a href={paper.certificate} target="_blank" rel="noreferrer" className="text-secondary" style={{textDecoration: 'underline', fontSize: '0.85rem'}}>Cert</a>}
+                      {paper.photos && paper.photos.length > 0 && <a href={paper.photos[0]} target="_blank" rel="noreferrer" className="text-secondary" style={{textDecoration: 'underline', fontSize: '0.85rem'}}>Photo</a>}
+                      {paper.bill && <a href={paper.bill} target="_blank" rel="noreferrer" className="text-secondary" style={{textDecoration: 'underline', fontSize: '0.85rem'}}>Bill</a>}
+                    </div>
+                  </td>
+                  <td>
+                    <div style={{display: 'flex', gap: '8px', minWidth: 'max-content'}}>
+                      <button className="action-btn" style={{backgroundColor: '#10b981', color: 'white'}} onClick={() => handleApprovePaper(paper._id)}>Approve</button>
+                      <button className="action-btn" style={{backgroundColor: '#ef4444', color: 'white'}} onClick={() => handleRejectPaper(paper._id)}>Reject</button>
+                    </div>
                   </td>
                 </tr>
               ))}
               {onHoldPapers.length === 0 && (
-                <tr><td colSpan="5" style={{textAlign: 'center', color: 'var(--text-muted)'}}>No papers on hold.</td></tr>
+                <tr><td colSpan="6" style={{textAlign: 'center', color: 'var(--text-muted)'}}>No papers on hold.</td></tr>
               )}
             </tbody>
           </table>
@@ -102,6 +132,7 @@ const Admin = () => {
                 <th>Staff ID</th>
                 <th>Date</th>
                 <th>Current Status</th>
+                <th>Files</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -115,12 +146,21 @@ const Admin = () => {
                     <span className="status-badge status-on-hold">{patent.status}</span>
                   </td>
                   <td>
-                    <button className="action-btn" onClick={() => handleApprovePatent(patent._id)}>Approve</button>
+                    <div style={{display: 'flex', gap: '8px', flexWrap: 'wrap'}}>
+                      {patent.pdf && <a href={patent.pdf} target="_blank" rel="noreferrer" className="text-secondary" style={{textDecoration: 'underline', fontSize: '0.85rem'}}>PDF</a>}
+                      {patent.approvalProof && <a href={patent.approvalProof} target="_blank" rel="noreferrer" className="text-secondary" style={{textDecoration: 'underline', fontSize: '0.85rem'}}>Proof</a>}
+                    </div>
+                  </td>
+                  <td>
+                    <div style={{display: 'flex', gap: '8px', minWidth: 'max-content'}}>
+                      <button className="action-btn" style={{backgroundColor: '#10b981', color: 'white'}} onClick={() => handleApprovePatent(patent._id)}>Approve</button>
+                      <button className="action-btn" style={{backgroundColor: '#ef4444', color: 'white'}} onClick={() => handleRejectPatent(patent._id)}>Reject</button>
+                    </div>
                   </td>
                 </tr>
               ))}
               {onHoldPatents.length === 0 && (
-                <tr><td colSpan="5" style={{textAlign: 'center', color: 'var(--text-muted)'}}>No patents on hold.</td></tr>
+                <tr><td colSpan="6" style={{textAlign: 'center', color: 'var(--text-muted)'}}>No patents on hold.</td></tr>
               )}
             </tbody>
           </table>

@@ -16,6 +16,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use((req, res, next) => {
+  const userHeader = req.headers['x-user-data'];
+  if (userHeader) {
+    try {
+      req.user = JSON.parse(userHeader);
+    } catch (e) { }
+  }
+  next();
+});
+
 mongoose.connect('mongodb://127.0.0.1:27017/EventTracker')
 .then(()=>{
     console.log("CONNECTION OPEN!!!")

@@ -9,6 +9,14 @@ const api = axios.create({
   },
 });
 
+api.interceptors.request.use((config) => {
+  const user = localStorage.getItem('user');
+  if (user) {
+    config.headers['x-user-data'] = user;
+  }
+  return config;
+});
+
 export const authAPI = {
   login: async (credentials) => {
     // Expected { staffId, password }
@@ -70,6 +78,28 @@ export const fdpAPI = {
   },
   create: async (data) => {
     const response = await api.post('/fdp/newFdp', data);
+    return response.data;
+  }
+};
+
+export const socialAPI = {
+  getAll: async () => {
+    const response = await api.get('/socialservice/allSocialServices');
+    return response.data;
+  },
+  create: async (data) => {
+    const response = await api.post('/socialservice/newSocialService', data);
+    return response.data;
+  }
+};
+
+export const profileAPI = {
+  getByStaffId: async (staffId) => {
+    const response = await api.get(`/profile/${staffId}`);
+    return response.data;
+  },
+  create: async (data) => {
+    const response = await api.post('/profile/newProfile', data);
     return response.data;
   }
 };

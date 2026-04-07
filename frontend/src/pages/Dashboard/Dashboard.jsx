@@ -6,6 +6,7 @@ import './Dashboard.css';
 
 const Dashboard = () => {
   const [stats, setStats] = useState({ papers: 0, patents: 0, fdps: 0 });
+  const [recent, setRecent] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,6 +22,14 @@ const Dashboard = () => {
           patents: patents.count || 0,
           fdps: fdps.count || 0,
         });
+
+        const allItems = [
+          ...(papers.data || []).map(p => ({ type: 'Paper', title: p.topic, staff: p.staff?.staffId, status: p.status, id: p._id })),
+          ...(patents.data || []).map(p => ({ type: 'Patent', title: p.topic, staff: p.staff?.staffId, status: p.status, id: p._id })),
+          ...(fdps.data || []).map(f => ({ type: 'FDP', title: f.topic, staff: f.staff?.staffId, status: 'Registered', id: f._id }))
+        ];
+        allItems.sort((a, b) => (a.id < b.id ? 1 : -1));
+        setRecent(allItems.slice(0, 5));
       } catch (err) {
         console.error("Failed to load dashboard stats", err);
       } finally {
@@ -30,11 +39,12 @@ const Dashboard = () => {
     fetchStats();
   }, []);
 
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
   return (
     <div className="dashboard-container">
       <div className="page-header">
-        <h2>Dashboard Overview</h2>
-        <p>A quick summary of all activities in the Event Tracker.</p>
+        <h2>{user.role === 'Admin' ? 'Admin Dashboard' : 'Professor Dashboard'}</h2>
+        <p>Welcome back, {user.staffId}. Here is your overview.</p>
       </div>
 
       {loading ? (
@@ -54,8 +64,18 @@ const Dashboard = () => {
           <h3>Recent Activity</h3>
           <span className="badge">Updated just now</span>
         </div>
-        <div className="chart-placeholder">
-          <p>No recent activity charts configured yet.</p>
+        <div className="recent-list" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
+          {recent.length === 0 ? <p>No recent activity found.</p> : recent.map((item, idx) => (
+             <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+               <div style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
+                 <span style={{color: 'var(--text-primary)', fontWeight: '500'}}>{item.title}</span>
+                 <span style={{color: 'var(--text-secondary)', fontSize: '0.85rem'}}>{item.staff} • {item.type}</span>
+               </div>
+               <div>
+                  <span className={`status-badge ${item.status === 'On Hold' ? 'status-on-hold' : 'status-published'}`}>{item.status}</span>
+               </div>
+             </div>
+          ))}
         </div>
       </div>
     </div>

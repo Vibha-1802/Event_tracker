@@ -6,6 +6,8 @@ import Papers from './pages/Papers/Papers';
 import Patents from './pages/Patents/Patents';
 import Fdp from './pages/FDP/Fdp';
 import Admin from './pages/Admin/Admin';
+import Profile from './pages/Profile/Profile';
+import SocialService from './pages/SocialService/SocialService';
 import './App.css';
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
           <Route path="/papers" element={<Papers />} />
           <Route path="/patents" element={<Patents />} />
           <Route path="/fdp" element={<Fdp />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/social-service" element={<SocialService />} />
           <Route path="/admin" element={<Admin />} />
         </Route>
         

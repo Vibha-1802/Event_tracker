@@ -19,7 +19,9 @@ const Login = () => {
       // But let's simulate for safety if backend is unreachable at first tests, 
       // though we should use the actual api:
       const res = await authAPI.login(credentials);
-      // Assuming success navigate to Dashboard
+      if (res.user) {
+        localStorage.setItem('user', JSON.stringify(res.user));
+      }
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed. Please check credentials.');
