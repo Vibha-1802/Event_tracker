@@ -104,4 +104,18 @@ export const profileAPI = {
   }
 };
 
+export const combinedAPI = {
+  getByStaffId: async (staffId) => {
+    const response = await api.get(`/combined/${staffId}`);
+    return response.data;
+  }
+};
+
+export const userAPI = {
+  changePassword: async (staffId, newPassword) => {
+    const response = await api.post('/users/newPassword', { staffId, newPassword });
+    return response.data;
+  }
+};
+
 export default api;

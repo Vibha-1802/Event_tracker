@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
-import { profileAPI } from '../../services/api';
+import { profileAPI, combinedAPI, userAPI } from '../../services/api';
+import { FileText, Lightbulb, BookOpen, Heart, Lock } from 'lucide-react';
 import Modal from '../../components/Modal/Modal';
 import '../../styles/table.css';
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
+  const [activities, setActivities] = useState({ paper: [], patent: [], fdp: [], social: [] });
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+  const [passwordForm, setPasswordForm] = useState({ newPassword: '', confirmPassword: '' });
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   const [formData, setFormData] = useState({
     name: '', age: '', phoneNumber: '', gmail: '', designation: '', department: '', expertise: '', joiningDate: '', photo: ''
@@ -14,14 +18,36 @@ const Profile = () => {
 
   const fetchProfile = async () => {
     try {
-      const res = await profileAPI.getByStaffId(user.staffId);
-      if (res.data && res.data.length > 0) {
-        setProfile(res.data[0]);
+      const dbData = await combinedAPI.getByStaffId(user.staffId);
+      if (dbData.profile && dbData.profile.length > 0) {
+        setProfile(dbData.profile[0]);
       }
+      setActivities({
+        paper: dbData.paper || [],
+        patent: dbData.patent || [],
+        fdp: dbData.fdp || [],
+        social: dbData.socialService || []
+      });
     } catch (err) {
       console.error('Failed to fetch Profile', err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handlePasswordSubmit = async (e) => {
+    e.preventDefault();
+    if (passwordForm.newPassword !== passwordForm.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+    try {
+      await userAPI.changePassword(user.staffId, passwordForm.newPassword);
+      alert("Password updated successfully!");
+      setIsPasswordModalOpen(false);
+      setPasswordForm({ newPassword: '', confirmPassword: '' });
+    } catch (err) {
+      alert("Failed to reset password");
     }
   };
 
@@ -76,6 +102,16 @@ const Profile = () => {
                 <p><strong>Expertise:</strong> <span className="text-secondary">{Array.isArray(profile.expertise) ? profile.expertise.join(', ') : profile.expertise}</span></p>
                 <p><strong>Joined:</strong> <span className="text-secondary">{profile.joiningDate ? new Date(profile.joiningDate).toLocaleDateString() : 'N/A'}</span></p>
               </div>
+              <div style={{marginTop: '0.8rem'}}>
+                <button 
+                  onClick={() => setIsPasswordModalOpen(true)} 
+                  style={{padding: '0.5rem 1rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border-color)', color: 'var(--text-secondary)', borderRadius: '6px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', transition: 'background 0.2s'}}
+                  onMouseOver={e => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
+                  onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.05)'}
+                >
+                  <Lock size={16} /> Reset Password
+                </button>
+              </div>
             </div>
           </div>
         ) : (
@@ -84,6 +120,73 @@ const Profile = () => {
           </div>
         )}
       </div>
+
+      {!loading && (
+        <div style={{marginTop: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
+          <h2 style={{fontSize: '1.3rem'}}>Professional Contributions</h2>
+          <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem'}}>
+            
+            {/* Papers */}
+            <div className="glass-panel" style={{padding: '1.5rem'}}>
+              <h3 style={{display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-primary)', marginBottom: '1rem'}}><FileText size={18} /> Papers ({activities.paper.length})</h3>
+              <div style={{display: 'flex', flexDirection: 'column', gap: '0.8rem'}}>
+                {activities.paper.length === 0 ? <p className="text-secondary">No recorded papers.</p> : activities.paper.map(p => (
+                  <div key={p._id} style={{padding: '0.8rem', background: 'rgba(255,255,255,0.03)', borderRadius: '6px', border: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                    <div>
+                      <p style={{fontWeight: 500}}>{p.topic}</p>
+                      <p className="text-secondary" style={{fontSize: '0.85rem'}}>{p.eventName} ({p.publisher})</p>
+                    </div>
+                    <span className="status-badge status-published">{p.status}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Patents */}
+            <div className="glass-panel" style={{padding: '1.5rem'}}>
+              <h3 style={{display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-primary)', marginBottom: '1rem'}}><Lightbulb size={18} /> Patents ({activities.patent.length})</h3>
+              <div style={{display: 'flex', flexDirection: 'column', gap: '0.8rem'}}>
+                {activities.patent.length === 0 ? <p className="text-secondary">No recorded patents.</p> : activities.patent.map(p => (
+                  <div key={p._id} style={{padding: '0.8rem', background: 'rgba(255,255,255,0.03)', borderRadius: '6px', border: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                    <div>
+                      <p style={{fontWeight: 500}}>{p.topic}</p>
+                      <p className="text-secondary" style={{fontSize: '0.85rem'}}>{new Date(p.date).toLocaleDateString()}</p>
+                    </div>
+                    <span className="status-badge status-published">{p.status}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* FDP */}
+            <div className="glass-panel" style={{padding: '1.5rem'}}>
+              <h3 style={{display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-primary)', marginBottom: '1rem'}}><BookOpen size={18} /> Faculty Dev Programs ({activities.fdp.length})</h3>
+              <div style={{display: 'flex', flexDirection: 'column', gap: '0.8rem'}}>
+                {activities.fdp.length === 0 ? <p className="text-secondary">No FDPs recorded.</p> : activities.fdp.map(f => (
+                  <div key={f._id} style={{padding: '0.8rem', background: 'rgba(255,255,255,0.03)', borderRadius: '6px', border: '1px solid var(--border-color)'}}>
+                    <p style={{fontWeight: 500}}>{f.topic}</p>
+                    <p className="text-secondary" style={{fontSize: '0.85rem'}}>Skills: {f.skillsGained?.join(', ')}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Social Service */}
+            <div className="glass-panel" style={{padding: '1.5rem'}}>
+              <h3 style={{display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-primary)', marginBottom: '1rem'}}><Heart size={18} /> Social Service ({activities.social.length})</h3>
+              <div style={{display: 'flex', flexDirection: 'column', gap: '0.8rem'}}>
+                {activities.social.length === 0 ? <p className="text-secondary">No social service recorded.</p> : activities.social.map(s => (
+                  <div key={s._id} style={{padding: '0.8rem', background: 'rgba(255,255,255,0.03)', borderRadius: '6px', border: '1px solid var(--border-color)'}}>
+                    <p style={{fontWeight: 500}}>{s.location}</p>
+                    <p className="text-secondary" style={{fontSize: '0.85rem'}}>{s.dates && s.dates.length > 0 ? new Date(s.dates[0]).toLocaleDateString() : 'N/A'}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      )}
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Create Profile">
         <form onSubmit={handleSubmit}>
@@ -124,6 +227,23 @@ const Profile = () => {
           <div className="modal-footer">
             <button type="button" className="action-btn" style={{background: 'var(--border-color)'}} onClick={() => setIsModalOpen(false)}>Cancel</button>
             <button type="submit" className="action-btn">Submit</button>
+          </div>
+        </form>
+      </Modal>
+
+      <Modal isOpen={isPasswordModalOpen} onClose={() => setIsPasswordModalOpen(false)} title="Reset Password">
+        <form onSubmit={handlePasswordSubmit}>
+          <div className="input-group">
+            <label>New Password</label>
+            <input type="password" required value={passwordForm.newPassword} onChange={e => setPasswordForm({...passwordForm, newPassword: e.target.value})} />
+          </div>
+          <div className="input-group">
+            <label>Confirm Password</label>
+            <input type="password" required value={passwordForm.confirmPassword} onChange={e => setPasswordForm({...passwordForm, confirmPassword: e.target.value})} />
+          </div>
+          <div className="modal-footer">
+            <button type="button" className="action-btn" style={{background: 'var(--border-color)'}} onClick={() => setIsPasswordModalOpen(false)}>Cancel</button>
+            <button type="submit" className="action-btn" style={{background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-purple))'}}>Confirm Reset</button>
           </div>
         </form>
       </Modal>
